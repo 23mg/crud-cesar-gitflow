@@ -18,7 +18,7 @@
     const res = await fetch('../src/read.php');
     const items = await res.json();
     const tbody = document.querySelector('#items-table tbody');
-    tbody.innerHTML = ''; // Limpia la tabla
+    tbody.innerHTML = '';
     items.forEach(item => {
       const fila = `<tr>
   <td>${item.id}</td>
