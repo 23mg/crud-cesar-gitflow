@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Item</title>
+</head>
+<body>
+  <h1>Editar Item</h1>
+  <form id="edit-form">
+    <input type="hidden" name="id" id="item-id">
+    <input type="text" name="name" id="item-name" placeholder="Nombre" required>
+    <input type="number" name="quantity" id="item-qty" placeholder="Cantidad" required>
+    <button type="submit">Guardar Cambios</button>
+  </form>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch(`../src/read_one.php?id=${id}`)
+      .then(res => res.json())
+      .then(item => {
+        document.getElementById("item-id").value = item.id;
+        document.getElementById("item-name").value = item.name;
+        document.getElementById("item-qty").value = item.quantity;
+      });
+
+    document.getElementById("edit-form").addEventListener("submit", async e => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      await fetch("../src/update.php", {
+        method: "POST",
+        body: form
+      });
+      alert("Cambios guardados");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
