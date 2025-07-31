@@ -3,7 +3,7 @@ $host = 'localhost';
 $db   = 'cruddb';
 $user = 'root';
 $pass = '';
-$dsn = "mysql:host=$host;ItemDb=$db;charset=utf8";
+$dsn = "mysql:host=$host;dbname=$db;charset=utf8";
 
 try {
     $pdo = new PDO($dsn, $user, $pass);
